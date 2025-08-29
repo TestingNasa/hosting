@@ -1,16 +1,114 @@
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>My First Website</title>
-  <style>
-    body { font-family: Arial, sans-serif; text-align: center; margin-top: 50px; }
-    h1 { color: #2c3e50; }
-    p { color: #555; }
-  </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>KindWin — Do good. Get lucky.</title>
+
+  <!-- Tailwind CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Razorpay -->
+  <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 </head>
-<body>
-  <h1>🚀 Hello World!</h1>
-  <p>Welcome to my first free website hosted on GitHub Pages.</p>
+<body class="bg-gray-50 text-gray-900">
+
+  <!-- Navbar -->
+  <header class="bg-white shadow sticky top-0 z-50">
+    <div class="container mx-auto flex justify-between items-center py-4 px-6">
+      <h1 class="text-2xl font-bold text-indigo-600">KindWin</h1>
+      <nav class="space-x-6 font-medium">
+        <a href="#about" class="hover:text-indigo-600 transition">About</a>
+        <a href="#donate" class="hover:text-indigo-600 transition">Donate</a>
+        <a href="#contact" class="hover:text-indigo-600 transition">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="bg-gradient-to-r from-indigo-600 to-purple-600 text-white text-center py-24">
+    <h2 class="text-5xl font-extrabold mb-6 animate-pulse">Do Good. Get Lucky.</h2>
+    <p class="text-lg mb-8 max-w-xl mx-auto">
+      Support causes you care about and stand a chance to win exciting rewards.
+    </p>
+    <a href="#donate" 
+       class="bg-white text-indigo-600 px-8 py-4 rounded-lg font-semibold shadow-lg hover:bg-gray-200 transition transform hover:scale-105">
+      🚀 Donate Now
+    </a>
+  </section>
+
+  <!-- About -->
+  <section id="about" class="py-20 container mx-auto px-6">
+    <h3 class="text-3xl font-bold text-center mb-12">About KindWin</h3>
+    <div class="grid md:grid-cols-3 gap-8">
+      <div class="bg-white shadow-lg rounded-2xl p-6 text-center hover:shadow-xl transition">
+        <h4 class="font-bold text-xl mb-3">🌍 Support Causes</h4>
+        <p class="text-gray-600">Your donations help fund education, healthcare, and environmental projects.</p>
+      </div>
+      <div class="bg-white shadow-lg rounded-2xl p-6 text-center hover:shadow-xl transition">
+        <h4 class="font-bold text-xl mb-3">🎁 Win Rewards</h4>
+        <p class="text-gray-600">Each donation enters you into our lucky draw with amazing prizes.</p>
+      </div>
+      <div class="bg-white shadow-lg rounded-2xl p-6 text-center hover:shadow-xl transition">
+        <h4 class="font-bold text-xl mb-3">🤝 Trusted Platform</h4>
+        <p class="text-gray-600">Secure transactions powered by Razorpay with 100% transparency.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Donate -->
+  <section id="donate" class="py-20 bg-gray-100 text-center">
+    <h3 class="text-3xl font-bold mb-6">Make a Donation</h3>
+    <p class="mb-6 text-gray-700">Your contribution makes a difference. Donate securely via Razorpay.</p>
+    <button onclick="openRazorpay()" 
+      class="bg-indigo-600 text-white px-8 py-4 rounded-lg shadow-lg font-semibold hover:bg-indigo-700 transition transform hover:scale-105">
+      💳 Donate with Razorpay
+    </button>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact" class="py-20 container mx-auto px-6">
+    <h3 class="text-3xl font-bold text-center mb-8">Contact Us</h3>
+    <form class="max-w-xl mx-auto bg-white shadow-lg rounded-2xl p-8">
+      <input type="text" placeholder="Your Name" class="w-full mb-4 px-4 py-3 border rounded-lg focus:ring-2 focus:ring-indigo-500" required>
+      <input type="email" placeholder="Your Email" class="w-full mb-4 px-4 py-3 border rounded-lg focus:ring-2 focus:ring-indigo-500" required>
+      <textarea placeholder="Your Message" rows="4" class="w-full mb-4 px-4 py-3 border rounded-lg focus:ring-2 focus:ring-indigo-500" required></textarea>
+      <button type="submit" class="w-full bg-indigo-600 text-white px-6 py-3 rounded-lg shadow-lg hover:bg-indigo-700 transition">Send Message</button>
+    </form>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-gray-900 text-gray-400 py-6 mt-12">
+    <div class="container mx-auto flex flex-col md:flex-row justify-between items-center px-6">
+      <p>© 2025 KindWin. All rights reserved.</p>
+      <div class="space-x-4 mt-4 md:mt-0">
+        <a href="#" class="hover:text-white">Twitter</a>
+        <a href="#" class="hover:text-white">Instagram</a>
+        <a href="#" class="hover:text-white">LinkedIn</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Razorpay Script -->
+  <script>
+    function openRazorpay() {
+      var options = {
+        "key": "rzp_test_123456789", // Replace with your Razorpay Key ID
+        "amount": 50000, // Example: ₹500
+        "currency": "INR",
+        "name": "KindWin",
+        "description": "Donation",
+        "handler": function (response){
+          alert("Payment Successful. ID: " + response.razorpay_payment_id);
+        },
+        "theme": {
+          "color": "#4F46E5"
+        }
+      };
+      var rzp = new Razorpay(options);
+      rzp.open();
+    }
+  </script>
+
 </body>
 </html>
